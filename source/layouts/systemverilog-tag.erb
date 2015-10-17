@@ -1,0 +1,12 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <%= partial "systemverilog/head" %>  
+  <body class="page <%= page_classes %>">
+    <%= partial "systemverilog/nav" %>  
+    <%= partial "systemverilog/header" %>    
+    <div id="main" role="main">
+      <%= yield %>
+    </div>
+    <%= partial "systemverilog/footer" %>
+  </body>
+</html>

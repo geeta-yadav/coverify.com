@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <%= partial current_article.blog_options[:name] + "/head" %>    
+  <body class="article <%= page_classes %>">    
+    <%= partial current_article.blog_options[:name] + "/nav" %>  
+    <%= image_tag(current_article.data.banner, id: 'banner') if current_article.data.banner %>
+    <%= partial current_article.blog_options[:name] + "/header" %>    
+    <div id="main" role="main">
+      <% 
+        content = Nokogiri::HTML(yield)
+        sidebar_content = content.xpath("//div[contains(@class, 'sidebar-section')]").remove
+      %>
+      <article>
+        <header class="article-header">
+          <h1><%= current_article.data.title %></h1>   
+          <% if current_article.data.subtitle %>
+            <h2 class="subtitle"><%= current_article.data.subtitle %></h2>  
+          <% end %>     
+          <div class="meta">               
+            <% if current_article.data.author_site %>
+              By <%= link_to current_article.data.author, current_article.data.author_site, rel: 'author external' %>
+            <% else %>
+              By <%= current_article.data.author %> 
+            <% end %>
+            &diams;
+            <time class="updated" datetime="<%= current_article.date.strftime('%b %e %Y') %>"><%= current_article.date.strftime('%b %e %Y') %></time> 
+            <!--
+            <div class="tags">
+              Tagged: <%= current_article.tags.join(', ') %>.
+            </div>
+            -->
+          </div>
+        </header>	
+        <div class="article-wrap row">
+          <div class="col-lg-9 columns">  
+            <div class="content">
+              <%= content %>  
+            </div>
+         </div>
+          <div class="col-lg-3 columns">
+            <div class="sidebar">
+              <%= sidebar_content %>
+              <div class="sidebar-section tags">
+                <h4>Tags</h4>
+                <%= tag_list(current_article, current_article.blog_options[:name]) %>
+              </div>
+              <!-- <div class="sidebar-section ad ad-300x250 sidebar-float"> -->
+              <!--   <\!--<h4>Advertisment</h4>-\-> -->
+              <!--   <\!-- Coverify (Skyscraper) -\-> -->
+              <!--   <ins class="adsbygoogle" -->
+              <!--        style="display:inline-block;width:300px;height:600px" -->
+              <!--        data-ad-client="ca-pub-1397369873900370" -->
+              <!--        data-ad-slot="7510590887"></ins> -->
+              <!--   <script> -->
+              <!--   (adsbygoogle = window.adsbygoogle || []).push({}); -->
+              <!--   </script> -->
+
+              <!--   <\!-- Coverify (MRec) -->
+              <!--   <ins class="adsbygoogle" -->
+              <!--        style="display:inline-block;width:300px;height:250px" -->
+              <!--        data-ad-client="ca-pub-1397369873900370" -->
+              <!--        data-ad-slot="3472500885"></ins> -->
+              <!--   <script> -->
+              <!--   (adsbygoogle = window.adsbygoogle || []).push({}); -->
+              <!--   </script> -->
+              <!--   -\-> -->
+              <!-- </div> -->
+
+              <!--
+              <div id="rotate-article">
+                <% if current_article.next_article %>
+                  <%= link_to 'next article &rarr;', current_article.next_article, { class: 'next' } %>
+                <% end %>
+                <% if current_article.previous_article %>
+                  <%= link_to '&larr; previous article', current_article.previous_article, { class: 'prev' } %>
+                <% end %>
+              </div>
+              -->
+
+          </div>
+        </div>   
+        <!--  
+        <div class="meta">
+          Posted on <time class="updated" datetime="<%= current_article.date.strftime('%b %e %Y') %>"><%= current_article.date.strftime('%b %e %Y') %></time> by 
+          <% if current_article.data.author_site %>
+            <%= link_to current_article.data.author, current_article.data.author_site, rel: 'author external' %>
+          <% else %>
+            <%= current_article.data.author %>
+          <% end %>. Tagged: <%= current_article.tags.join(', ') %>.
+        </div>
+        -->
+      </article>
+
+      <%= partial current_article.blog_options[:name] + "/social" %>    
+
+      <!-- <div class="row show-for-large-up"> -->
+      <!--   <div class="ad ad-720x90 text-center"> -->
+      <!--     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+      <!--     <\!-- Coverify (Leaderboard) -\-> -->
+      <!--     <ins class="adsbygoogle" -->
+      <!--          style="display:inline-block;width:728px;height:90px" -->
+      <!--          data-ad-client="ca-pub-1397369873900370" -->
+      <!--          data-ad-slot="8042301285"></ins> -->
+      <!--     <script> -->
+      <!--     (adsbygoogle = window.adsbygoogle || []).push({}); -->
+      <!--     </script> -->
+      <!--   </div> -->
+      <!-- </div> -->
+	       
+      <%= partial current_article.blog_options[:name] + "/comments" %>  
+    </div>
+    <%= partial current_article.blog_options[:name] + "/footer" %>
+  </body>
+</html>

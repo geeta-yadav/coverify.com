@@ -1,0 +1,12 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <%= partial "coverification/head" %>  
+  <body class="page <%= page_classes %>">
+    <%= partial "coverification/nav" %>  
+    <%= partial "coverification/header" %>    
+    <div id="main" role="main">
+      <%= yield %>
+    </div>
+    <%= partial "coverification/footer" %>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <%= partial "vlang/head" %>  
+  <body class="page <%= page_classes %>">
+    <%= partial "vlang/nav" %>  
+    <%= partial "vlang/header" %>    
+    <div id="main" role="main">
+      <%= yield %>
+    </div>
+    <%= partial "vlang/footer" %>
+  </body>
+</html>

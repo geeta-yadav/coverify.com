@@ -1,0 +1,218 @@
+
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-2 columns">
+    <div id="coverify">
+      <%= link_to(image_tag("coverify_banner_240x240.png", height: 240, width: 240, title: "Coverify", alt: "Coverify"), data.site.url, title: "Coverify", rel: "home") %>
+    </div>
+  </div>
+  <div class="col-lg-5 end columns">
+    <div id="welcome">
+      <a href="http://coverify.com">  Coverify</a> creates Verification Tools and provides Expert Services for
+      <!-- <br class="show-for-medium-up"> --> Verifying FPGA, SoC, Virtual Platform and Emulation Platform based Systems<!-- <br class="show-for-medium-up"> Our expertize includes Hardware/Software Coverification and UVM <br class="show-for-medium-up"> Compliant Verification Infrastructures and VIPs using Vlang, SystemVerilog and SystemC. -->
+
+    </div>  
+
+  </div>
+</div>
+
+<div id="projects" class="boxes">	
+  <h2>Projects</h2>
+  <div class="row">
+    <div class="col-lg-6 columns">
+      <a href="http://vlang.org" target="_blank" class="vlang" title="vlang: Native Multicore Verification">
+        <span class="icon"></span>
+        <span class="title">Vlang</span>
+        <span class="strap">Native Multicore Verification</span>
+        <span class="intro">Next Generation Opensource Verification Language with Multicore UVM implementation. Vlang VIPs would be available to download soon.</span>                 
+      </a>
+    </div>
+    <div class="col-lg-6 columns">
+      <a href="/vip/ethernet" target="_blank" class="ether" title="Gigabit Ethernet VIP">
+        <span class="icon"></span>
+        <span class="title">Gigabit Ethernet VIP</span>
+        <span class="strap">frame synthesis and analysis</span>
+        <span class="intro"></span>                 
+      </a>
+    </div>
+  </div>
+</div>
+<div id="services" class="boxes">	
+  <h2>Services</h2>
+  <div class="row">
+    <div class="col-lg-4 columns">  
+      <a href="/verification.html" class="verification" title="Functional Verification">
+        <span class="icon"><%= image_tag("logos/verif-80x80.png", height: 80, width: 80, title: "verification", alt: "verification") %></span>
+        <span class="title">Functional Verification</span>
+        <span class="strap">first pass silicon success</span>
+        <span class="intro">Augment your verification team. We can help you in creating UVM based verification infrastructure and in reaching your coverage goals faster.</span>
+      </a>
+    </div>
+    <div class="col-lg-4 columns">  
+      <a href="/software-driven.html" class="swdriven" title="Software Driven Verification">
+        <span class="icon"><%= image_tag("logos/penguincar.png", height: 80, width: 80, title: "swdriven", alt: "swdriven") %></span>
+        <span class="title">Software Driven Verification</span>
+        <span class="strap">bootstrap your device drivers</span>
+        <span class="intro">At DVCon India 2015 edition, coverify co-published a customer success story of Software Driven Hardware Verification. Check it out here. </span>
+      </a>
+    </div>
+    <div class="col-lg-4 columns"> 
+      <a href="/modeling/" class="modeling" title="C/C++ Modeling of Hardware">
+        <span class="icon"><%= image_tag("logos/modeling-80x80.png", height: 80, width: 80, title: "modeling", alt: "modeling") %></span>
+        <span class="title">Modeling</span>
+        <span class="strap">C/C++ modeling of hardware</span>
+        <span class="intro">Leverage our vast experience in modeling hardware in C/C++. Models can be used as reference model for verification or for hardware software coverification.</span>                 
+     </a>
+    </div>
+  </div>
+</div>
+        
+
+<div id="articles">
+  <h2>Vlang Articles</h2>
+  <% 
+    articles = []
+    featured_articles = []
+    standard_articles = []
+     blog('vlang').articles.each do |article|
+      next unless article.data.layout == 'article'
+      if article.data.send(:featured)
+        featured_articles << article
+      else
+        standard_articles << article
+      end
+    end
+    articles.concat featured_articles
+    articles.concat standard_articles
+  %>
+  <% 
+  #articles = articles.sort_by {|obj| 
+  #  obj.data["featured"] = false unless obj.data.has_key?(:featured); # ? true : false 
+  #  return obj.data["featured"]
+  #} 
+  %>
+  <% articles.each_slice(4) do |slice| %>
+    <div class="row">
+      <% slice.each do |article| %>
+        <div class="col-lg-3 columns">
+          <%= link_to(image_tag(article.data.image), article) if article.data.image && article.data.featured %>
+          <!--
+          obj.data.send(:featured) ? true : false
+          obj.data.featured
+          raise
+          -->
+          <div class="blog-post">
+            <h3 class="title"><a href="<%= article.url.sub('/vlang', 'http://vlang.com') %>"><%= article.title %></a> <span class="time"><%= article.date.strftime('%b %e %Y') %></span></h3>
+            <!--<time><%= article.date.strftime('%b %e') %></time>-->
+            <p><%= article.summary(200) %></p>
+            <div class="category"><%= article.data.tags.split(", ")[0] %></div>
+            <!--
+            <div class="tags"><%= tag_links(article, 'vlang') %></div>
+            <%= link_to "Read more", article, { class: 'more-link' } %>
+            -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+<div id="articles">
+  <h2>Systemverilog Articles</h2>
+  <% 
+    articles = []
+    featured_articles = []
+    standard_articles = []
+     blog('systemverilog').articles.each do |article|
+      next unless article.data.layout == 'article'
+      if article.data.send(:featured)
+        featured_articles << article
+      else
+        standard_articles << article
+      end
+    end
+    articles.concat featured_articles
+    articles.concat standard_articles
+  %>
+  <% 
+  #articles = articles.sort_by {|obj| 
+  #  obj.data["featured"] = false unless obj.data.has_key?(:featured); # ? true : false 
+  #  return obj.data["featured"]
+  #} 
+  %>
+  <% articles.each_slice(4) do |slice| %>
+    <div class="row">
+      <% slice.each do |article| %>
+        <div class="col-lg-3 columns">
+          <%= link_to(image_tag(article.data.image), article) if article.data.image && article.data.featured %>
+          <!--
+          obj.data.send(:featured) ? true : false
+          obj.data.featured
+          raise
+          -->
+          <div class="blog-post">
+            <h3 class="title"><a href="<%= article.url.sub('/systemverilog', 'http://systemverilog.net') %>"><%= article.title %></a> <span class="time"><%= article.date.strftime('%b %e %Y') %></span></h3>
+            <!--<time><%= article.date.strftime('%b %e') %></time>-->
+            <p><%= article.summary(200) %></p>
+            <div class="category"><%= article.data.tags.split(", ")[0] %></div>
+            <!--
+            <div class="tags"><%= tag_links(article, 'systemverilog') %></div>
+            <%= link_to "Read more", article, { class: 'more-link' } %>
+            -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div id="articles">
+  <h2>Coverification Articles</h2>
+  <% 
+    articles = []
+    featured_articles = []
+    standard_articles = []
+     blog('coverification').articles.each do |article|
+      next unless article.data.layout == 'article'
+      if article.data.send(:featured)
+        featured_articles << article
+      else
+        standard_articles << article
+      end
+    end
+    articles.concat featured_articles
+    articles.concat standard_articles
+  %>
+  <% 
+  #articles = articles.sort_by {|obj| 
+  #  obj.data["featured"] = false unless obj.data.has_key?(:featured); # ? true : false 
+  #  return obj.data["featured"]
+  #} 
+  %>
+  <% articles.each_slice(4) do |slice| %>
+    <div class="row">
+      <% slice.each do |article| %>
+        <div class="col-lg-3 columns">
+          <%= link_to(image_tag(article.data.image), article) if article.data.image && article.data.featured %>
+          <!--
+          obj.data.send(:featured) ? true : false
+          obj.data.featured
+          raise
+          -->
+          <div class="blog-post">
+            <h3 class="title"><a href="<%= article.url.sub('/coverification', 'http://coverification.com') %>"><%= article.title %></a> <span class="time"><%= article.date.strftime('%b %e %Y') %></span></h3>
+            <!--<time><%= article.date.strftime('%b %e') %></time>-->
+            <p><%= article.summary(200) %></p>
+            <div class="category"><%= article.data.tags.split(", ")[0] %></div>
+            <!--
+            <div class="tags"><%= tag_links(article, 'coverification') %></div>
+            <%= link_to "Read more", article, { class: 'more-link' } %>
+            -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
